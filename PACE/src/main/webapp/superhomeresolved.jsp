@@ -119,7 +119,7 @@ body {
 				
 			}
 		};
-		x.open("get","http://localhost:8080/ERS/login/reimbursements/resolved");
+		x.open("get","http://"+location.host+"/ERS/login/reimbursements/resolved");
 		x.send();
 	}
 	</script>

@@ -67,7 +67,7 @@ body {
  		 window.onload = function() {
 			
  			var session ='<%=session.getAttribute("username")%>';
- 			fetch("http://localhost:8080/ERS/login/userinfo/"+session)
+ 			fetch("http://"+location.host+"/ERS/login/userinfo/"+session)
  			.then(function(response){
  				return response.json();
  			})

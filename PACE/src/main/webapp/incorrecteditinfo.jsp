@@ -87,7 +87,7 @@ color: red;
 				}
 			};
 			var session ='<%=session.getAttribute("username")%>';
-			x.open("get","http://localhost:8080/ERS/login/userinfo/"+session);
+			x.open("get","http://"+location.host+"/ERS/login/userinfo/"+session);
 			x.send();
 		} 
 	</script>

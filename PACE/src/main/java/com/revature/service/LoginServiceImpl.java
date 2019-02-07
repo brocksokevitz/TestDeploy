@@ -64,6 +64,8 @@ public class LoginServiceImpl implements LoginService {
 			return loginService.getAllUsers();
 		} else {
 			
+			log.info("button"+req.getParameter("button"));
+			
 			if(isMultipart) {
 				req.getRequestDispatcher("home.jsp").forward(req, resp);
 				attempting = loginService.getUser(String.valueOf(req.getSession().getAttribute("username")));
@@ -74,8 +76,12 @@ public class LoginServiceImpl implements LoginService {
 				
 			}else if (req.getParameter("button").equals("login")) {
 				attempting = loginService.attemptAuthentication(username, password);
-			} else if (req.getParameter("button").equals("logout")) {
-				attempting = null;
+			}else if (req.getParameter("button").equals("logout")) {
+				req.getSession().invalidate();
+				req.logout();
+				log.info(req.getSession().getAttribute("username"));
+				resp.sendRedirect(req.getContextPath());
+				return "/index?faces-redirect=true";
 			} else if (req.getParameter("button").equals("registerSubmit")) {
 				attempting = loginService.insertUser(username, email, password);
 			} else if (req.getParameter("button").equals("submit reimbursement")) {
@@ -172,7 +178,7 @@ public class LoginServiceImpl implements LoginService {
 				}
 			}
 
-			log.info(attempting);
+			log.info("user: " + attempting);
 
 			if (attempting != null) {
 				req.getSession().setAttribute("username", attempting.getUsername());
@@ -232,7 +238,7 @@ public class LoginServiceImpl implements LoginService {
 		log.info("password: "+ password);
 		if (UserDaoImplementation.getUserDao().verifyPassword(username, password))
 			return UserDaoImplementation.getUserDao().getUser(username);
-		return new User();
+		return null;
 	}
 
 	@Override

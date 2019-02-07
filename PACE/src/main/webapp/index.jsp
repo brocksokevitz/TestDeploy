@@ -19,14 +19,14 @@ body {
 <div class="mt-5"></div>
 
 	<div class="container col-lg-4 offset-lg-4 jumbotron">
-		<form action="/ERS/login" method="POST">
+		<form action="/ERS/login" method="POST" id="form">
 			<div class="form-group centered">
 				<label for="username">Username</label> <input type="text"
-					name="username" class="form-control">
+					name="username" class="form-control" id="user">
 			</div>
 			<div class="form-group centered">
 				<label for="passwords">Password</label> <input type="password"
-					name="password" class="form-control">
+					name="password" class="form-control" id="pass">
 			</div>
 
 			<div>
@@ -37,7 +37,10 @@ body {
 		</form>
 	</div>
 	<script>
-		
+	window.onload = function() {
+		var user = document.getElementById("form");
+		user.reset();
+	}
 	</script>
 </body>
 </html>

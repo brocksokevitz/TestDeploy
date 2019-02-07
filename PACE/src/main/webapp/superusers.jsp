@@ -103,7 +103,7 @@ body {
 				
 			}
 		};
-		x.open("get","http://localhost:8080/ERS/login/users");
+		x.open("get","http://"+location.host+"/ERS/login/users");
 		x.send();
 	}
 	</script>

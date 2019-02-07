@@ -91,6 +91,8 @@ body {
 			    }
 			});
 			
+			console.log('<%=session.getAttribute("username")%>');
+			
 			var x = new XMLHttpRequest();
 			x.onreadystatechange = () => {
 				//comment the if condition and try to print all different readyStates
@@ -119,7 +121,7 @@ body {
 					
 				}
 			};
-			x.open("get","http://localhost:8080/ERS/login/reimbursements/username");
+			x.open("get","http://"+location.host+"/ERS/login/reimbursements/username");
 			x.send();
 		}
 	</script>

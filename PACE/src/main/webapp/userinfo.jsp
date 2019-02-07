@@ -121,7 +121,7 @@ body {
 				}
 			};
 			var session ='<%=session.getAttribute("username")%>';
-			x.open("get","http://localhost:8080/ERS/login/userinfo/");
+			x.open("get","http://"+location.host+"/ERS/login/userinfo/");
 			x.send();
 		}
 	</script>
