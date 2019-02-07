@@ -64,7 +64,7 @@ body {
 			</tbody>
 		</table>
 
-		<form action="/ERS/login/" method="POST">
+		<form action="/ERS/login" method="POST">
 
 			<label for="selectId">Reimbursement Number</label> <p id="invalid" style="color:red;"></p>
 			<input
