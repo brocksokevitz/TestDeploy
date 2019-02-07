@@ -232,7 +232,7 @@ public class LoginServiceImpl implements LoginService {
 		log.info("password: "+ password);
 		if (UserDaoImplementation.getUserDao().verifyPassword(username, password))
 			return UserDaoImplementation.getUserDao().getUser(username);
-		return null;
+		return new User();
 	}
 
 	@Override
