@@ -84,6 +84,8 @@ public class UserDaoImplementation implements UserDao {
 			log.error(e.getMessage());
 			log.error(e.getStackTrace());
 		}
+		
+		
 		return false;
 	}
 
