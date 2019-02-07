@@ -65,22 +65,16 @@ body {
 	<script>
 	
  		 window.onload = function() {
-
-			var x = new XMLHttpRequest();
-			x.onreadystatechange = () => {
-				//comment the if condition and try to print all different readyStates
-				if((x.readyState == 4) && (x.status ==200)){
-					//console.log(JSON.parse(x.responseText));
-					data = JSON.parse(x.responseText);
-					console.log(data)
-
-					document.getElementById("username").setAttribute('value', data.username);					
-					document.getElementById("email").setAttribute('value', data.email);
-				}
-			};
-			var session ='<%=session.getAttribute("username")%>';
-			x.open("get","http://localhost:8080/ERS/login/userinfo/"+session);
-			x.send();
+			
+ 			var session ='<%=session.getAttribute("username")%>';
+ 			fetch("http://localhost:8080/ERS/login/userinfo/"+session)
+ 			.then(function(response){
+ 				return response.json();
+ 			})
+ 			.then(function(data){
+				document.getElementById("username").setAttribute('value', data.username);					
+				document.getElementById("email").setAttribute('value', data.email);
+ 			})
 		} 
 	</script>
 </body>
