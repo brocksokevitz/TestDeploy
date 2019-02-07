@@ -117,7 +117,10 @@ public class LoginServiceImpl implements LoginService {
 				attempting = loginService
 						.attemptAuthentication(String.valueOf(req.getSession().getAttribute("username")), password);
 
-				if (attempting == null) {
+				if(!username.equals(req.getSession().getAttribute("username")) && loginService.userExists(username)) {
+					req.getSession().setAttribute("info", "username or email is taken");
+					successfulEdit = false;
+				}if (attempting == null) {
 					req.getSession().setAttribute("info", "invalid password");
 					successfulEdit = false;
 					attempting = loginService.getUser(String.valueOf(req.getSession().getAttribute("username")));
@@ -125,7 +128,7 @@ public class LoginServiceImpl implements LoginService {
 
 					User updatedUser = null;
 					
-					if(req.getParameter("new_password").length()>0) {
+					if(req.getParameter("new_password") != null) {
 						updatedUser = new User(username, email, req.getParameter("new_password"),
 								attempting.getSuperuser());
 					}else {
@@ -138,7 +141,7 @@ public class LoginServiceImpl implements LoginService {
 							String.valueOf(req.getSession().getAttribute("username")));
 
 					if (attempting == null) {
-						req.getSession().setAttribute("info", "user already exists");
+						req.getSession().setAttribute("info", "username or email already exists");
 						successfulEdit = false;
 						attempting = loginService.getUser(String.valueOf(req.getSession().getAttribute("username")));
 					} else {
@@ -343,5 +346,11 @@ public class LoginServiceImpl implements LoginService {
 			log.error(ex);
 		}
 		log.info("we got here");
+	}
+
+	@Override
+	public boolean userExists(String username) {
+		// TODO Auto-generated method stub
+		return UserDaoImplementation.getUserDao().userExists(username);
 	}
 }

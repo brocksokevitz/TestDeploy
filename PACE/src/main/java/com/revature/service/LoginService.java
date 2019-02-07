@@ -28,4 +28,6 @@ public interface LoginService {
 	void sendEmail(User employee, User manager, Reimbursement reimbursement, String message);
 
 	void uploadFile(String filePath, HttpServletRequest req, int id);
+
+	boolean userExists(String username);
 }

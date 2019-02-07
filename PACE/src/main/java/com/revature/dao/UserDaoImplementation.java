@@ -71,7 +71,19 @@ public class UserDaoImplementation implements UserDao {
 
 	@Override
 	public boolean userExists(String username) {
-		// TODO Auto-generated method stub
+		Connection conn = null;
+		conn = cu.getConnection();
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("select username from users where username ='"+ username +"'");	
+
+			if(rs.next()) {
+			return true;
+			}
+		}catch(SQLException e) {
+			log.error(e.getMessage());
+			log.error(e.getStackTrace());
+		}
 		return false;
 	}
 
@@ -195,8 +207,9 @@ public class UserDaoImplementation implements UserDao {
 			ps.setString(4, oldUsername);
 			
 			ResultSet results = ps.executeQuery();
-			
+			if(results.next()) {
 				return user;				
+			}	
 		}catch (Exception e) {
 			log.error(e.getMessage());
 		}
