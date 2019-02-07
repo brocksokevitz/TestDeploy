@@ -228,6 +228,8 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public User attemptAuthentication(String username, String password) {
+		log.info("username: " + username);
+		log.info("password: "+ password);
 		if (UserDaoImplementation.getUserDao().verifyPassword(username, password))
 			return UserDaoImplementation.getUserDao().getUser(username);
 		return null;

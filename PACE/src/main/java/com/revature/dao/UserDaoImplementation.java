@@ -38,7 +38,7 @@ public class UserDaoImplementation implements UserDao {
 		
 		Connection conn = null;
 		conn = cu.getConnection();
-		
+		log.info(user);;
 		try{
 			String sql = "insert into users values(?,?,?,?)";
 			String output = "";
